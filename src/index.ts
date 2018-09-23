@@ -1,3 +1,5 @@
+import v0 from "./v0";
+
 type User = {
     id: string,
     email: string,
@@ -7,6 +9,7 @@ type User = {
 
 type Label = {
     id: string,
+    boardId: string,
     text: string,
     color: {
         r: number,
@@ -17,7 +20,7 @@ type Label = {
 
 type CardComment = {
     id: string,
-    user: [User],
+    user: string,
     text: string,
     date: string
 };
@@ -32,7 +35,7 @@ type Column = {
     id: string,
     title: string,
     order: number,
-    cards: [Card]
+    cards: [string]
 };
 
 type Card = {
@@ -40,17 +43,17 @@ type Card = {
     title: string,
     description: string,
     dueDate: string,
-    assignees: [User],
-    labels: [Label],
-    comments: [Comment],
-    activities: [Activity]
+    assignees: [string],
+    labels: [string],
+    comments: [string],
+    activities: [string]
 };
 
 type Board = {
     id: string,
-    users: [User],
-    columns: [Column],
-    labels: [Label]
+    users: [string],
+    columns: [string],
+    labels: [string]
 };
 
 // const Boards = {
@@ -78,4 +81,22 @@ type Board = {
 //   }
 // }
 
-// export default {}
+type Options = {
+    v: number,
+    baseUrl: string
+};
+
+// type v0 = {
+//     Labels:
+// }
+
+export default (token: string, {
+    v = 0,
+    baseUrl = 'https://app.gitkraken.com/'
+}): any => {
+    // Some logic here about versioning.
+    if (v != 0) {
+        throw 'Invalid version';
+    }
+    return new v0(token, baseUrl);
+};
