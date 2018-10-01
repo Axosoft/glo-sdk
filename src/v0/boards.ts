@@ -105,20 +105,17 @@ export default class BoardFunctions {
         return response.data;
     }
 
-    // async getBoards(options: {
-    //     archived: boolean | null,
-    //     fields: []
-    // }): Promise<[Member]> {
+    async getBoards(options: {
+        archived: boolean | null,
+        fields: [BoardField]
+    }): Promise<[Member]> {
+        const response = await this.axios.get(`/api/glo/boards?archivied=${options.archived}&fields=${options.fields.join('%2C')}`);
+        return response.data;
+    }
 
-    // }
 };
 
-// export type BoardField =
-//     'archived_date' |
-//     'name'          |
-//     'members'       |
-//     'members.role'  |
-//     'sync_provider';
+export type BoardField = keyof Board
 
 export type Board = {
     archived_columns: [string],

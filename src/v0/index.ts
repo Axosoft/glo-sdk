@@ -11,10 +11,12 @@ import a, {
 } from 'axios';
 
 import LabelFunctions from './labels';
+import BoardFunctions from './boards';
 
 export default class {
     token: string;
     Labels: LabelFunctions;
+    Boards: BoardFunctions;
     axios: AxiosInstance;
 
     constructor(token: string, baseUrl: string) {
@@ -27,6 +29,7 @@ export default class {
         });
         // this.Labels = Labels;
         this.Labels = new LabelFunctions(this.axios);
+        this.Boards = new BoardFunctions(this.axios);
     }
 
 
