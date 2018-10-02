@@ -100,7 +100,7 @@ export default class BoardFunctions {
         archived: boolean | null,
         fields: [BoardField]
     }): Promise<[Member]> {
-        return (await this.axios.get(`/api/glo/boards?archivied=${options.archived}&fields=${options.fields.join('%2C')}`)).data;
+        return (await this.axios.get(`/api/glo/boards?archived=${options.archived}&fields=${options.fields.join('%2C')}`)).data;
     }
 
     async getArchivedBoards(options: {
