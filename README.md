@@ -1,5 +1,5 @@
 # GitKraken Glo Node SDK
-
+[![Build Status](https://travis-ci.org/James-Quigley/glo-node-sdk.svg?branch=master)](https://travis-ci.org/James-Quigley/glo-node-sdk)
 ## Contributing
 
 ### Features
