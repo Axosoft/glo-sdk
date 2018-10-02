@@ -1,13 +1,23 @@
 import { AxiosInstance } from "axios";
 
-
 export default class CardFunctions {
     axios: AxiosInstance;
     constructor(axios: AxiosInstance) {
         this.axios = axios;
     }
 
-    async getCards(boardId: string, options: {
+    async createCard(board_id: string, column_id: string, name: string, position: number, labels: [{ id: string, name: string }], members: [{ id: string }]): Promise<Card> {
+        return (await this.axios.post(`/api/glo/boards/${board_id}/cards`, {
+            board_id: board_id,
+            column_id: column_id,
+            labels,
+            members,
+            name,
+            position
+        })).data;
+    }
+
+    async getCards(board_id: string, options: {
         archived: boolean | null,
         fields: [CardFields]
     }): Promise<
@@ -21,10 +31,10 @@ export default class CardFunctions {
             cards: [Card]
         }
     ]> {
-        return (await this.axios.get(`/api/glo/boards/${boardId}/cards?archived=${options.archived}&fields=${options.fields.join('%2C')}`)).data;
+        return (await this.axios.get(`/api/glo/boards/${board_id}/cards?archived=${options.archived}&fields=${options.fields.join('%2C')}`)).data;
     }
 
-    async getArchivedCards(boardId: string, options: {
+    async getArchivedCards(board_id: string, options: {
         fields: [CardFields]
     }): Promise<
     [
@@ -37,7 +47,7 @@ export default class CardFunctions {
             cards: [Card]
         }
     ]> {
-        return (await this.axios.get(`/api/glo/boards/${boardId}/cards?archived=true&fields=${options.fields.join('%2C')}`)).data;
+        return (await this.axios.get(`/api/glo/boards/${board_id}/cards?archived=true&fields=${options.fields.join('%2C')}`)).data;
     }
 };
 

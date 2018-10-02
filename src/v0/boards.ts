@@ -18,46 +18,46 @@ export default class BoardFunctions {
         })).data;
     }
 
-    async deleteBoard(boardId: string): Promise<void> {
-        if (boardId == null) {
+    async deleteBoard(board_id: string): Promise<void> {
+        if (board_id == null) {
             throw 'Missing board ID';
         }
 
-        return (await this.axios.delete(`/api/glo/boards/${boardId}`)).data;
+        return (await this.axios.delete(`/api/glo/boards/${board_id}`)).data;
     }
 
-    async archiveBoard(boardId: string): Promise<void> {
-        if (boardId == null) {
+    async archiveBoard(board_id: string): Promise<void> {
+        if (board_id == null) {
             throw 'Missing board ID';
         }
 
-        return (await this.axios.post(`/api/glo/boards/${boardId}/archive`)).data;
+        return (await this.axios.post(`/api/glo/boards/${board_id}/archive`)).data;
     }
 
-    async unarchiveBoard(boardId: string): Promise<void> {
-        if (boardId == null) {
+    async unarchiveBoard(board_id: string): Promise<void> {
+        if (board_id == null) {
             throw 'Missing board ID';
         }
 
-        return (await this.axios.post(`/api/glo/boards/${boardId}/unarchive`)).data;
+        return (await this.axios.post(`/api/glo/boards/${board_id}/unarchive`)).data;
     }
 
-    async renameBoard(boardId: string, newName: string): Promise<void> {
-        if (boardId == null) {
+    async renameBoard(board_id: string, newName: string): Promise<void> {
+        if (board_id == null) {
             throw 'Missing board ID';
         }
         if (newName == null) {
             throw 'Missing new name';
         }
 
-        return (await this.axios.post(`/api/glo/boards/${boardId}`, {
-            id: boardId,
+        return (await this.axios.post(`/api/glo/boards/${board_id}`, {
+            id: board_id,
             name: newName
         })).data;
     }
 
-    async inviteUserToBoard(boardId: string, userId: string, role: 'full'): Promise<Board> {
-        if (boardId == null) {
+    async inviteUserToBoard(board_id: string, userId: string, role: 'full'): Promise<Board> {
+        if (board_id == null) {
             throw 'Missing board ID';
         }
         if (userId == null) {
@@ -67,7 +67,7 @@ export default class BoardFunctions {
             throw 'Missing role';
         }
 
-        return (await this.axios.post(`/api/glo/boards/${boardId}/members`, {
+        return (await this.axios.post(`/api/glo/boards/${board_id}/members`, {
             added: {
                 id: userId,
                 role
@@ -75,25 +75,25 @@ export default class BoardFunctions {
         })).data;
     }
 
-    async removeUserFromBoard(boardId: string, member: Member): Promise<Board> {
-        if (boardId == null) {
+    async removeUserFromBoard(board_id: string, member: Member): Promise<Board> {
+        if (board_id == null) {
             throw 'Missing board ID';
         }
         if (member == null) {
             throw 'Missing board member to remove';
         }
 
-        return (await this.axios.post(`/api/glo/boards/${boardId}/members`, {
+        return (await this.axios.post(`/api/glo/boards/${board_id}/members`, {
             removed: member
         })).data;
     }
 
-    async getBoardActivity(boardId: string, page = 1, page_size = 50): Promise<[Activity]> {
-        if (boardId == null) {
+    async getBoardActivity(board_id: string, page = 1, page_size = 50): Promise<[Activity]> {
+        if (board_id == null) {
             throw 'Missing board ID';
         }
 
-        return (await this.axios.get(`/api/activity/board/${boardId}?page=${page}&page_size=${page_size}`)).data;
+        return (await this.axios.get(`/api/activity/board/${board_id}?page=${page}&page_size=${page_size}`)).data;
     }
 
     async getBoards(options: {
