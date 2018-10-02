@@ -12,12 +12,10 @@ export default class BoardFunctions {
             throw 'Missing board name';
         }
 
-        const response = await this.axios.post(`/api/glo/boards`, {
+        return (await this.axios.post(`/api/glo/boards`, {
             name,
             is_public: false
-        });
-
-        return response.data;
+        })).data;
     }
 
     async deleteBoard(boardId: string): Promise<void> {
@@ -25,8 +23,7 @@ export default class BoardFunctions {
             throw 'Missing board ID';
         }
 
-        const response = await this.axios.delete(`/api/glo/boards/${boardId}`);
-        return;
+        return (await this.axios.delete(`/api/glo/boards/${boardId}`)).data;
     }
 
     async archiveBoard(boardId: string): Promise<void> {
@@ -34,8 +31,7 @@ export default class BoardFunctions {
             throw 'Missing board ID';
         }
 
-        const response = await this.axios.post(`/api/glo/boards/${boardId}/archive`);
-        return;
+        return (await this.axios.post(`/api/glo/boards/${boardId}/archive`)).data;
     }
 
     async unarchiveBoard(boardId: string): Promise<void> {
@@ -43,8 +39,7 @@ export default class BoardFunctions {
             throw 'Missing board ID';
         }
 
-        const response = await this.axios.post(`/api/glo/boards/${boardId}/unarchive`);
-        return;
+        return (await this.axios.post(`/api/glo/boards/${boardId}/unarchive`)).data;
     }
 
     async renameBoard(boardId: string, newName: string): Promise<void> {
@@ -55,11 +50,10 @@ export default class BoardFunctions {
             throw 'Missing new name';
         }
 
-        const response = await this.axios.post(`/api/glo/boards/${boardId}`, {
+        return (await this.axios.post(`/api/glo/boards/${boardId}`, {
             id: boardId,
             name: newName
-        });
-        return;
+        })).data;
     }
 
     async inviteUserToBoard(boardId: string, userId: string, role: 'full'): Promise<Board> {
@@ -73,13 +67,12 @@ export default class BoardFunctions {
             throw 'Missing role';
         }
 
-        const response = await this.axios.post(`/api/glo/boards/${boardId}/members`, {
+        return (await this.axios.post(`/api/glo/boards/${boardId}/members`, {
             added: {
                 id: userId,
                 role
             }
-        });
-        return response.data;
+        })).data;
     }
 
     async removeUserFromBoard(boardId: string, member: Member): Promise<Board> {
@@ -90,10 +83,9 @@ export default class BoardFunctions {
             throw 'Missing board member to remove';
         }
 
-        const response = await this.axios.post(`/api/glo/boards/${boardId}/members`, {
+        return (await this.axios.post(`/api/glo/boards/${boardId}/members`, {
             removed: member
-        });
-        return response.data;
+        })).data;
     }
 
     async getBoardActivity(boardId: string, page = 1, page_size = 50): Promise<[Activity]> {
@@ -101,16 +93,23 @@ export default class BoardFunctions {
             throw 'Missing board ID';
         }
 
-        const response = await this.axios.get(`/api/activity/board/${boardId}?page=${page}&page_size=${page_size}`);
-        return response.data;
+        return (await this.axios.get(`/api/activity/board/${boardId}?page=${page}&page_size=${page_size}`)).data;
     }
 
     async getBoards(options: {
         archived: boolean | null,
         fields: [BoardField]
     }): Promise<[Member]> {
-        const response = await this.axios.get(`/api/glo/boards?archivied=${options.archived}&fields=${options.fields.join('%2C')}`);
-        return response.data;
+        return (await this.axios.get(`/api/glo/boards?archivied=${options.archived}&fields=${options.fields.join('%2C')}`)).data;
+    }
+
+    async getArchivedBoards(options: {
+        fields: [BoardField]
+    }) {
+        return await this.getBoards({
+            archived: true,
+            fields: options.fields
+        });
     }
 
 };
