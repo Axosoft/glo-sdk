@@ -21,6 +21,10 @@ export default class CardFunctions {
         return (await this.axios.delete(`/api/glo/boards/${board_id}/cards/${card_id}`, {})).data
     }
 
+    async archiveCard(board_id: string, card_id: string): Promise<void> {
+        return (await this.axios.post(`/api/glo/boards/${board_id}/cards/${card_id}/archive`, {})).data
+    }
+
     async getCards(board_id: string, options: {
         archived: boolean | null,
         fields: [CardFields]
