@@ -1,13 +1,5 @@
 import a, {
-    AxiosRequestConfig,
-    AxiosResponse,
-    AxiosError,
-    AxiosInstance,
-    AxiosAdapter,
-    Cancel,
-    CancelToken,
-    CancelTokenSource,
-    Canceler
+    AxiosInstance
 } from 'axios';
 
 import LabelFunctions from './labels';

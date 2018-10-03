@@ -5,10 +5,7 @@ type Options = {
     baseUrl: string
 };
 
-export default (token: string, {
-    v = 0,
-    baseUrl = 'https://app.gitkraken.com/'
-}): any => {
+export default (token: string, v = 0, baseUrl = 'https://app.gitkraken.com/'): v0 => {
     // Some logic here about versioning.
     if (v != 0) {
         throw 'Invalid version';

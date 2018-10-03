@@ -6,9 +6,9 @@
 There are plenty of calls to the Glo API that still need to be added. Additionally extra functionality and helper functions on top of these can also be built out.
 
 ### Testing
-I don't know very much about Jest and using mocks, so help in this area would be much appreciated!
+I don't know very much about Jest and using mocks, so help in this area would be much appreciated! If there are better ways to do what I'm trying to do, please let me know.
 
-Jest has been set up in this project, and tests will be run as a part of CI when that is set up. Testing for all the API calls and helper functions would be a big help.
+Jest has been set up in this project, and tests are run with CI.
 
 ### Documentation
 Documenting this project by means of tsdoc (jsdoc?) or some other format would be a big assistance. The docs can also be generated as a part of CI.
