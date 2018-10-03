@@ -57,6 +57,49 @@ export default class CardFunctions {
     ]> {
         return (await this.axios.get(`/api/glo/boards/${board_id}/cards?archived=true&fields=${options.fields.join('%2C')}`)).data;
     }
+
+    async addAndRemoveAssignees(board_id: string, card_id: string, added: [{ id: string }] | [], removed: [{ id: string }] | []): Promise<{
+        errors: [string],
+        id: string,
+        members: [{ id: string }]
+    }> {
+        return (await this.axios.post(`/api/glo/boards/${board_id}/cards/${card_id}/members`, {
+            added,
+            removed
+        })).data;
+    }
+
+    async addAssignees(board_id: string, card_id: string, assignees: [{ id: string }]): Promise<{
+        errors: [string],
+        id: string,
+        members: [{ id: string }]
+    }> {
+        return await this.addAndRemoveAssignees(board_id, card_id, assignees, []);
+    }
+
+    async addAssignee(board_id: string, card_id: string, user_id: string): Promise<{
+        errors: [string],
+        id: string,
+        members: [{ id: string }]
+    }> {
+        return await this.addAndRemoveAssignees(board_id, card_id, [{ id: user_id }], []);
+    }
+
+    async removeAssignees(board_id: string, card_id: string, assignees: [{ id: string }]): Promise<{
+        errors: [string],
+        id: string,
+        members: [{ id: string }]
+    }> {
+        return await this.addAndRemoveAssignees(board_id, card_id, [], assignees);
+    }
+
+    async removeAssignee(board_id: string, card_id: string, user_id: string): Promise<{
+        errors: [string],
+        id: string,
+        members: [{ id: string }]
+    }> {
+        return await this.addAndRemoveAssignees(board_id, card_id, [], [{ id: user_id }]);
+    }
 };
 
 export type CardFields = keyof Card;
