@@ -180,6 +180,14 @@ export default class CardFunctions {
         return (await this.axios.delete(`/api/glo/board/${board_id}/comments/${comment_id}`)).data
     }
 
+    async subscribe(board_id: string, card_id: string) : Promise<void> {
+        return (await this.axios.post(`/api/glo/boards/${board_id}/cards/${card_id}/subscribe`)).data;
+    }
+
+    async unsubscribe(board_id: string, card_id: string) : Promise<void> {
+        return (await this.axios.post(`/api/glo/boards/${board_id}/cards/${card_id}/unsubscribe`)).data;
+    }
+
 };
 
 export type CardFields = keyof Card;
