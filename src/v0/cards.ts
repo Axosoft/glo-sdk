@@ -149,6 +149,18 @@ export default class CardFunctions {
         return await this.addAndRemoveLabels(board_id, card_id, [], [{ id: label_id }]);
     }
 
+    async changeDueDate(board_id: string, card_id: string, due_date: string | null) : Promise<{id: string, due_date: string}> {
+        return (await this.axios.post(`/api/glo/boards/${board_id}/cards/${card_id}`, {
+            id: card_id,
+            fields: ["due_date"],
+            due_date
+        })).data
+    }
+
+    async removeDueDate(board_id: string, card_id: string) : Promise<{id: string, due_date: string}> {
+        return await this.changeDueDate(board_id, card_id, null);
+    }
+
 };
 
 export type CardFields = keyof Card;
