@@ -161,6 +161,25 @@ export default class CardFunctions {
         return await this.changeDueDate(board_id, card_id, null);
     }
 
+    async addComment(board_id: string, card_id: string, text: string) : Promise<Comment> {
+        return (await this.axios.post(`/api/glo/boards/${board_id}/comments`, {
+            board_id,
+            card_id,
+            text
+        })).data;
+    }
+
+    async editComment(board_id: string, comment_id: string, text: string) : Promise<Comment>{
+        return (await this.axios.post(`/api/glo/boards/${board_id}/comments/${comment_id}`, {
+            id: comment_id,
+            text
+        })).data;
+    }
+
+    async deleteComment(board_id: string, comment_id: string) : Promise<void> {
+        return (await this.axios.delete(`/api/glo/board/${board_id}/comments/${comment_id}`)).data
+    }
+
 };
 
 export type CardFields = keyof Card;
@@ -189,4 +208,17 @@ export type Card = {
     name: string,
     total_task_count: number,
     updated_date: string
+}
+
+export type Comment = {
+    board_id: string,
+    card_id: string,
+    created_by: string,
+    created_date: string,
+    id: string,
+    text: string,
+    updated_date: string,
+    user: {
+        id: string
+    }
 }
