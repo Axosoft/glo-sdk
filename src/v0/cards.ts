@@ -100,6 +100,55 @@ export default class CardFunctions {
     }> {
         return await this.addAndRemoveAssignees(board_id, card_id, [], [{ id: user_id }]);
     }
+
+    async addAndRemoveLabels(board_id: string, card_id: string, added: [{ id: string }] | [], removed: [{ id: string }] | []): Promise<{
+        labels: [{
+            id: string,
+            name: string
+        }]
+    }> {
+        return (await this.axios.post(`/api/glo/boards/${board_id}/cards/${card_id}/labels`, {
+            added,
+            removed
+        })).data;
+    }
+
+    async addLabels(board_id: string, card_id: string, labels: [{ id: string }]): Promise<{
+        labels: [{
+            id: string,
+            name: string
+        }]
+    }> {
+        return await this.addAndRemoveLabels(board_id, card_id, labels, []);
+    }
+
+    async addLabel(board_id: string, card_id: string, label_id: string): Promise<{
+        labels: [{
+            id: string,
+            name: string
+        }]
+    }> {
+        return await this.addAndRemoveLabels(board_id, card_id, [{ id: label_id }], []);
+    }
+
+    async removeLabels(board_id: string, card_id: string, labels: [{ id: string }]): Promise<{
+        labels: [{
+            id: string,
+            name: string
+        }]
+    }> {
+        return await this.addAndRemoveLabels(board_id, card_id, [], labels);
+    }
+
+    async removeLabel(board_id: string, card_id: string, label_id: string): Promise<{
+        labels: [{
+            id: string,
+            name: string
+        }]
+    }> {
+        return await this.addAndRemoveLabels(board_id, card_id, [], [{ id: label_id }]);
+    }
+
 };
 
 export type CardFields = keyof Card;
