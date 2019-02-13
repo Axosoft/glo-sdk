@@ -1,14 +1,5 @@
-import v0 from "./v0";
+import v1 from "./v1";
 
-type Options = {
-    v: number,
-    baseUrl: string
-};
-
-export default (token: string, v = 0, baseUrl = 'https://app.gitkraken.com/'): v0 => {
-    // Some logic here about versioning.
-    if (v != 0) {
-        throw 'Invalid version';
-    }
-    return new v0(token, baseUrl);
+export default (token: string) => {
+    return v1(token);
 };

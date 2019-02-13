@@ -15,6 +15,7 @@
     "esModuleInterop": true,
     "lib": [
       "es2015"
-    ]
+    ],
+    "noImplicitAny": true
   }
 }
