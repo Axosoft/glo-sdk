@@ -1,7 +1,10 @@
 {
   "name": "@axosoft/glo-sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "JavaScript SDK for GitKraken Glo APIs",
+  "repository": {
+    "url": "https://github.com/Axosoft/glo-sdk"
+  },
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
