@@ -2,7 +2,6 @@ import gloApi from '../../src/index';
 import axios, { getMock, postMock, deleteMock } from '../../__mocks__/axios';
 jest.mock('axios');
 
-
 describe('Board tests', () => {
 
     beforeEach(() => {

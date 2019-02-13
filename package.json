@@ -1,13 +1,14 @@
 {
-  "name": "glo-node-sdk",
+  "name": "@axosoft/glo-sdk",
   "version": "1.0.0",
-  "description": "",
+  "description": "JavaScript SDK for GitKraken Glo APIs",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prepublish": "yarn build && yarn test"
   },
   "author": "James Quigley",
   "license": "MIT",
