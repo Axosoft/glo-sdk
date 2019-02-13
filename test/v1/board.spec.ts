@@ -1,4 +1,4 @@
-import gloApi from '../../src/index';
+import GloSDK from '../../src/index';
 import axios, { getMock, postMock, deleteMock } from '../../__mocks__/axios';
 jest.mock('axios');
 
@@ -11,7 +11,7 @@ describe('Board tests', () => {
     })
 
     test('Get boards', async () => {
-      const response = await gloApi('fake token').boards.getAll();
+      const response = await GloSDK('fake token').boards.getAll();
       expect(response).toEqual('data')
 
       expect(getMock).toHaveBeenCalledTimes(1);
@@ -25,7 +25,7 @@ describe('Board tests', () => {
     });
 
     test('Get boards with parameters', async () => {
-      const response = await gloApi('fake token').boards.getAll({
+      const response = await GloSDK('fake token').boards.getAll({
         archived: true,
         page: 2,
         per_page: 25,
@@ -46,7 +46,7 @@ describe('Board tests', () => {
   });
 
   test('Get board by id', async () => {
-    const response = await gloApi('fake token').boards.get('1234');
+    const response = await GloSDK('fake token').boards.get('1234');
 
     expect(response).toEqual('data');
 
@@ -56,7 +56,7 @@ describe('Board tests', () => {
   });
 
   test('Get board by id with parameters', async () => {
-    const response = await gloApi('fake token').boards.get('1234', { fields: ['members', 'labels'] });
+    const response = await GloSDK('fake token').boards.get('1234', { fields: ['members', 'labels'] });
 
     expect(response).toEqual('data');
 

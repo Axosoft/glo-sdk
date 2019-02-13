@@ -26,17 +26,17 @@ You must pass in an auth token. All method calls return a promise, so you should
 
 ```javascript
 // Import options
-const gloApi = require('@axosoft/glo-sdk');
-import gloApi from '@axosoft/glo-sdk';
+const GloSDK = require('@axosoft/glo-sdk');
+import GloSDK from '@axosoft/glo-sdk';
 
 
 // Usage
-gloApi(authToken).boards.getAll()
+GloSDK(authToken).boards.getAll()
   .then(boards => console.log(boards))
   .catch(error => console.error(error));
 
 try {
-  const boards = await gloApi(authToken).boards.getAll();
+  const boards = await GloSDK(authToken).boards.getAll();
 } catch (error) {
   console.log(error);
 }

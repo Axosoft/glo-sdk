@@ -1,9 +1,8 @@
 import v1 from "./v1";
 
 
-const api = (token: string) => {
+const GloSDK = (token: string) => {
     return v1(token);
 };
-module.exports = api
 
-export default api
+export = GloSDK;
