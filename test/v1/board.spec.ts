@@ -15,13 +15,7 @@ describe('Board tests', () => {
       expect(response).toEqual('data')
 
       expect(getMock).toHaveBeenCalledTimes(1);
-      expect(getMock).toHaveBeenCalledWith(`/glo/boards?
-        page=1&
-        per_page=50&
-        archived=false&
-        sort=asc&
-        fields=name
-      `);
+      expect(getMock).toHaveBeenCalledWith(`/glo/boards?page=1&per_page=50&archived=false&sort=asc&fields=name`);
     });
 
     test('Get boards with parameters', async () => {
@@ -36,13 +30,7 @@ describe('Board tests', () => {
       expect(response).toEqual('data')
 
       expect(getMock).toHaveBeenCalledTimes(1);
-      expect(getMock).toHaveBeenCalledWith(`/glo/boards?
-        page=2&
-        per_page=25&
-        archived=true&
-        sort=desc&
-        fields=id
-      `);
+      expect(getMock).toHaveBeenCalledWith(`/glo/boards?page=2&per_page=25&archived=true&sort=desc&fields=id`);
   });
 
   test('Get board by id', async () => {
@@ -51,8 +39,7 @@ describe('Board tests', () => {
     expect(response).toEqual('data');
 
     expect(getMock).toHaveBeenCalledTimes(1);
-    expect(getMock).toHaveBeenCalledWith(`/glo/boards/1234?
-          fields=name`);
+    expect(getMock).toHaveBeenCalledWith(`/glo/boards/1234?fields=name`);
   });
 
   test('Get board by id with parameters', async () => {
@@ -61,7 +48,6 @@ describe('Board tests', () => {
     expect(response).toEqual('data');
 
     expect(getMock).toHaveBeenCalledTimes(1);
-    expect(getMock).toHaveBeenCalledWith(`/glo/boards/1234?
-          fields=members%2Clabels`);
+    expect(getMock).toHaveBeenCalledWith(`/glo/boards/1234?fields=members%2Clabels`);
   });
 })

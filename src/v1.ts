@@ -25,21 +25,14 @@ function v1(token: string) {
       ...options
     }
     return (
-      await axios.get(`/glo/boards?
-        page=${mergedOptions.page}&
-        per_page=${mergedOptions.per_page}&
-        archived=${mergedOptions.archived}&
-        sort=${mergedOptions.sort}&
-        fields=${mergedOptions.fields.join('%2C')}
-      `)
+      await axios.get(`/glo/boards?page=${mergedOptions.page}&per_page=${mergedOptions.per_page}&archived=${mergedOptions.archived}&sort=${mergedOptions.sort}&fields=${mergedOptions.fields.join('%2C')}`)
     ).data;
   }
 
   const boards = {
     get: async (board_id: string, options?: GetBoardOptions): Promise<Board> => {
       return (
-        await axios.get(`/glo/boards/${board_id}?
-          fields=${ ((options && options.fields) || ['name']).join('%2C')}`
+        await axios.get(`/glo/boards/${board_id}?fields=${ ((options && options.fields) || ['name']).join('%2C')}`
         )
       ).data;
     },
@@ -52,12 +45,7 @@ function v1(token: string) {
       },
       getCards: async (board_id: string, column_id: string, options?: GetCardOptions & PageOptions & { archived: boolean, sort: 'asc' | 'desc' }): Promise<[Card]> => {
         return (
-          await axios.get(`/glo/boards/${board_id}/columns/${column_id}cards?
-            page=${ (options && options.page) || 1}&
-            per_page=${ (options && options.per_page) || 50}&
-            archived=${ (options && options.archived) || false}&
-            sort=${ (options && options.sort) || 'asc'}
-            fields=${ ((options && options.fields) || ['name', 'board_id', 'column_id']).join('%2C')}
+          await axios.get(`/glo/boards/${board_id}/columns/${column_id}cards?page=${ (options && options.page) || 1}&per_page=${ (options && options.per_page) || 50}&archived=${ (options && options.archived) || false}&sort=${ (options && options.sort) || 'asc'}fields=${ ((options && options.fields) || ['name', 'board_id', 'column_id']).join('%2C')}
           `)
         ).data;
       },
@@ -77,11 +65,7 @@ function v1(token: string) {
       },
       getAttachments: async (board_id: string, card_id: string, options?: GetAttachmentOptions & PageOptions & { sort: 'asc' | 'desc' }): Promise<[Attachment]> => {
         return (
-          await axios.get(`/glo/boards/${board_id}/cards/${card_id}/attachments?
-            page=${(options && options.page) || 1}&
-            per_page=${(options && options.per_page) || 50}
-            sort=${(options && options.sort) || 'asc'}
-            fields=${((options && options.fields) || ['filename', 'mime_type']).join('%2C')}`)
+          await axios.get(`/glo/boards/${board_id}/cards/${card_id}/attachments?page=${(options && options.page) || 1}&per_page=${(options && options.per_page) || 50}&sort=${(options && options.sort) || 'asc'}&fields=${((options && options.fields) || ['filename', 'mime_type']).join('%2C')}`)
         ).data;
       },
       comments: {
@@ -93,11 +77,7 @@ function v1(token: string) {
         },
         get: async (board_id: string, card_id: string, options?: GetCommentOptions & PageOptions & { sort: 'asc' | 'desc' }): Promise<[Comment]> => {
           return (
-            await axios.get(`/glo/boards/${board_id}/cards/${card_id}/comments?
-          page=${(options && options.page) || 1}&
-          per_page=${(options && options.per_page) || 50}
-          sort=${(options && options.sort) || 'asc'}
-          fields=${((options && options.fields) || ['text']).join('%2C')}`)
+            await axios.get(`/glo/boards/${board_id}/cards/${card_id}/comments?page=${(options && options.page) || 1}&per_page=${(options && options.per_page) || 50}&sort=${(options && options.sort) || 'asc'}&fields=${((options && options.fields) || ['text']).join('%2C')}`)
           ).data;
         },
         create: async (board_id: string, card_id: string, comment: Comment): Promise<Comment> => {
@@ -106,12 +86,7 @@ function v1(token: string) {
       },
       getAll: async (board_id: string, options?: GetCardOptions & PageOptions & { archived: boolean, sort: 'asc' | 'desc' }): Promise<[Card]> => {
         return (
-          await axios.get(`/glo/boards/${board_id}/cards?
-          page=${ (options && options.page) || 1}&
-          per_page=${ (options && options.per_page) || 50}&
-          archived=${ (options && options.archived) || false}&
-          sort=${ (options && options.sort) || 'asc'}&
-          fields=${ ((options && options.fields) || ['name', 'board_id', 'column_id']).join('%2C')}
+          await axios.get(`/glo/boards/${board_id}/cards?page=${ (options && options.page) || 1}&per_page=${ (options && options.per_page) || 50}&archived=${ (options && options.archived) || false}&sort=${ (options && options.sort) || 'asc'}&fields=${ ((options && options.fields) || ['name', 'board_id', 'column_id']).join('%2C')}
         `)
         ).data;
       },
