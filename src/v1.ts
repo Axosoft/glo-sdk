@@ -44,11 +44,11 @@ function v1(token: string) {
       return (await axios.delete(`/glo/boards/${board_id}`)).data;
     },
     labels: {
-      create: async (board_id: string, label_name: string, color: Color): Promise<Label> => {
-        return (await axios.post(`/glo/boards/${board_id}/labels`, { name: label_name, color: color })).data;
+      create: async (board_id: string, label: Label): Promise<Label> => {
+        return (await axios.post(`/glo/boards/${board_id}/labels`, { name: label.name, color: label.color })).data;
       },
-      edit: async (board_id: string, label_id: string, label_name: string, color: Color): Promise<Label> => {
-        return (await axios.post(`/glo/boards/${board_id}/labels/${label_id}`, { name: label_name, color: color })).data;
+      edit: async (board_id: string, label_id: string, label: Label): Promise<Label> => {
+        return (await axios.post(`/glo/boards/${board_id}/labels/${label_id}`, { name: label.name, color: label.color })).data;
       },
       delete: async (board_id: string, label_id: string): Promise<any> => {
         return (await axios.delete(`/glo/boards/${board_id}/labels/${label_id}`)).data;
