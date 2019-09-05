@@ -116,10 +116,10 @@ export type User = {
 }
 
 export type Color = {
-    r: number,
-    g: number,
-    b: number,
-    a: number
+    r?: number,
+    g?: number,
+    b?: number,
+    a?: number
 }
 
 interface SortOptions {
