@@ -60,6 +60,9 @@ typings/
 # next.js build output
 .next
 
+# Webstorm
+.idea/
+
 \.DS_Store
 
 dist

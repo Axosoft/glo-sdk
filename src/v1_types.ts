@@ -52,6 +52,7 @@ export type Card = {
     },
     board_id?: string,
     column_id?: string,
+    cover_image_attachment_id?: string,
     created_date?: string,
     updated_date?: string,
     archived_date?: string,
@@ -98,12 +99,7 @@ export type Comment = {
 export type Label = {
     id?: string,
     name?: string,
-    color?: {
-        r?: number,
-        g?: number,
-        b?: number,
-        a?: number
-    },
+    color?: Color,
     created_date?: string,
     created_by?: {
         id: string
@@ -117,6 +113,13 @@ export type User = {
     name?: string,
     username?: string,
     email?: string
+}
+
+export type Color = {
+    r: number,
+    g: number,
+    b: number,
+    a: number
 }
 
 interface SortOptions {
