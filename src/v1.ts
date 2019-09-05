@@ -1,5 +1,5 @@
 import a from 'axios';
-import { Attachment, Board, Card, Column, Comment, GetAttachmentOptions, GetAllBoardOptions, GetBoardOptions, GetCardOptions, GetCommentOptions, GetUserOptions, PageOptions, User, BoardField } from './v1_types';
+import { Attachment, Board, Card, Color, Column, Comment, GetAttachmentOptions, GetAllBoardOptions, GetBoardOptions, GetCardOptions, GetCommentOptions, GetUserOptions, Label, NewLabel, PageOptions, User, BoardField } from './v1_types';
 
 export default v1;
 
@@ -17,24 +17,42 @@ function v1(token: string) {
     per_page: 50,
     sort: 'asc',
     fields: ['name'],
-  }
+  };
 
   const getAllBoards = async (options?: GetAllBoardOptions): Promise<[Board]> => {
     const mergedOptions = {
       ...defaultGetAllBoardOptions,
       ...options
-    }
+    };
     return (
       await axios.get(`/glo/boards?page=${mergedOptions.page}&per_page=${mergedOptions.per_page}&archived=${mergedOptions.archived}&sort=${mergedOptions.sort}&fields=${mergedOptions.fields.join('%2C')}`)
     ).data;
-  }
+  };
 
   const boards = {
+    getAll: getAllBoards,
     get: async (board_id: string, options?: GetBoardOptions): Promise<Board> => {
       return (
         await axios.get(`/glo/boards/${board_id}?fields=${ ((options && options.fields) || ['name']).join('%2C')}`
         )
       ).data;
+    },
+    create: async (board_name: string): Promise<Board> => {
+      return (await axios.post(`/glo/boards`, { name: board_name })).data;
+    },
+    delete: async (board_id: string): Promise<any> => {
+      return (await axios.delete(`/glo/boards/${board_id}`)).data;
+    },
+    labels: {
+      create: async (board_id: string, label: NewLabel): Promise<Label> => {
+        return (await axios.post(`/glo/boards/${board_id}/labels`, label)).data;
+      },
+      edit: async (board_id: string, label_id: string, label: Label): Promise<Label> => {
+        return (await axios.post(`/glo/boards/${board_id}/labels/${label_id}`, label)).data;
+      },
+      delete: async (board_id: string, label_id: string): Promise<any> => {
+        return (await axios.delete(`/glo/boards/${board_id}/labels/${label_id}`)).data;
+      },
     },
     columns: {
       edit: async (board_id: string, column_id: string, { column_name, position }: { column_name?: string, position?: number }): Promise<Column> => {
@@ -92,9 +110,8 @@ function v1(token: string) {
       create: async (board_id: string, card: Card): Promise<Card> => {
         return (await axios.post(`/glo/boards/${board_id}/cards`, card)).data
       }
-    },
-    getAll: getAllBoards
-  }
+    }
+  };
 
   const users = {
     getCurrentUser: async (options?: GetUserOptions): Promise<User> => {
