@@ -15,6 +15,9 @@
     "prepublishOnly": "yarn build"
   },
   "author": "James Quigley",
+  "contributors": [
+    "Chuck Dries <chuckd@axosoft.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0"
