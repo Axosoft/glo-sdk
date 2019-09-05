@@ -1,6 +1,6 @@
 {
   "name": "@axosoft/glo-sdk",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "JavaScript SDK for GitKraken Glo APIs",
   "repository": {
     "url": "https://github.com/Axosoft/glo-sdk"
@@ -15,6 +15,9 @@
     "prepublishOnly": "yarn build"
   },
   "author": "James Quigley",
+  "contributors": [
+    "Chuck Dries <chuckd@axosoft.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0"
