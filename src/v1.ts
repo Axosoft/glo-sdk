@@ -45,10 +45,10 @@ function v1(token: string) {
     },
     labels: {
       create: async (board_id: string, label: Label): Promise<Label> => {
-        return (await axios.post(`/glo/boards/${board_id}/labels`, { name: label.name, color: label.color })).data;
+        return (await axios.post(`/glo/boards/${board_id}/labels`, label)).data;
       },
       edit: async (board_id: string, label_id: string, label: Label): Promise<Label> => {
-        return (await axios.post(`/glo/boards/${board_id}/labels/${label_id}`, { name: label.name, color: label.color })).data;
+        return (await axios.post(`/glo/boards/${board_id}/labels/${label_id}`, label)).data;
       },
       delete: async (board_id: string, label_id: string): Promise<any> => {
         return (await axios.delete(`/glo/boards/${board_id}/labels/${label_id}`)).data;
