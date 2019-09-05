@@ -44,7 +44,7 @@ function v1(token: string) {
       return (await axios.delete(`/glo/boards/${board_id}`)).data;
     },
     labels: {
-      create: async (board_id: string, label: Label): Promise<Label> => {
+      create: async (board_id: string, label: NewLabel): Promise<Label> => {
         return (await axios.post(`/glo/boards/${board_id}/labels`, label)).data;
       },
       edit: async (board_id: string, label_id: string, label: Label): Promise<Label> => {
