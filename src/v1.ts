@@ -1,5 +1,5 @@
 import a from 'axios';
-import { Attachment, Board, Card, Color, Column, Comment, GetAttachmentOptions, GetAllBoardOptions, GetBoardOptions, GetCardOptions, GetCommentOptions, GetUserOptions, Label, PageOptions, User, BoardField } from './v1_types';
+import { Attachment, Board, Card, Color, Column, Comment, GetAttachmentOptions, GetAllBoardOptions, GetBoardOptions, GetCardOptions, GetCommentOptions, GetUserOptions, Label, NewLabel, PageOptions, User, BoardField } from './v1_types';
 
 export default v1;
 

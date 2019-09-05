@@ -106,6 +106,11 @@ export type Label = {
     }
 }
 
+export type NewLabel = Label & {
+    color: Color;
+    name: string;
+}
+
 type UserField = keyof User;
 
 export type User = {
