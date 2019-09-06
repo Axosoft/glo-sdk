@@ -12,9 +12,9 @@ export type Attachment = {
 
 export type BatchError = {
     type: string,
-    "message": string,
-    "input_data": any,
-    "request_index": number
+    message: string,
+    input_data: any,
+    request_index: number
 }
 
 export type BoardField = keyof Board;
