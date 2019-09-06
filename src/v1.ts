@@ -104,7 +104,7 @@ function v1(token: string) {
           return (await axios.post(`/glo/boards/${board_id}/cards/${card_id}/comments`, comment)).data;
         },
         batchCreate: async (board_id: string, card_id: string, comments: [Comment], send_notifications: boolean = false): Promise<{successful: [Comment], errors: [BatchError]}> => {
-          return (await axios.post(`/glo/boards/${board_id}/cards/${card_id}/comments`, {comments: comments, send_notifications: send_notifications})).data;
+          return (await axios.post(`/glo/boards/${board_id}/cards/${card_id}/comments/batch`, {comments: comments, send_notifications: send_notifications})).data;
         }
       },
       getAll: async (board_id: string, options?: GetCardOptions & PageOptions & { archived: boolean, sort: 'asc' | 'desc' }): Promise<[Card]> => {
@@ -117,7 +117,7 @@ function v1(token: string) {
         return (await axios.post(`/glo/boards/${board_id}/cards`, card)).data
       },
       batchCreate: async (board_id: string, cards: [Card], send_notifications: boolean = false): Promise<{successful: [Card], errors: [BatchError]}> => {
-        return (await axios.post(`/glo/boards/${board_id}/cards`, {cards: cards, send_notifications: send_notifications})).data
+        return (await axios.post(`/glo/boards/${board_id}/cards/batch`, {cards: cards, send_notifications: send_notifications})).data
       },
     }
   };
