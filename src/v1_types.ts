@@ -10,6 +10,13 @@ export type Attachment = {
     }
 }
 
+export type BatchError = {
+    type: string,
+    "message": string,
+    "input_data": any,
+    "request_index": number
+}
+
 export type BoardField = keyof Board;
 
 export type Board = {
@@ -77,6 +84,10 @@ export type Column = {
     created_by?: {
         id: string
     }
+}
+
+export type NewColumn = Column & {
+    name: string;
 }
 
 type CommentField = keyof Comment;

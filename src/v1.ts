@@ -1,5 +1,5 @@
 import a from 'axios';
-import { Attachment, Board, Card, Color, Column, Comment, GetAttachmentOptions, GetAllBoardOptions, GetBoardOptions, GetCardOptions, GetCommentOptions, GetUserOptions, Label, NewLabel, PageOptions, User, BoardField } from './v1_types';
+import { Attachment, BatchError, Board, Card, Column, Comment, GetAttachmentOptions, GetAllBoardOptions, GetBoardOptions, GetCardOptions, GetCommentOptions, GetUserOptions, Label, NewColumn, NewLabel, PageOptions, User} from './v1_types';
 
 export default v1;
 
@@ -55,8 +55,8 @@ function v1(token: string) {
       },
     },
     columns: {
-      edit: async (board_id: string, column_id: string, { column_name, position }: { column_name?: string, position?: number }): Promise<Column> => {
-        return (await axios.post(`/glo/boards/${board_id}/columns/${column_id}`, { name: column_name, position })).data;
+      edit: async (board_id: string, column_id: string, column: NewColumn): Promise<Column> => {
+        return (await axios.post(`/glo/boards/${board_id}/columns/${column_id}`, column)).data;
       },
       delete: async (board_id: string, column_id: string): Promise<Column> => {
         return (await axios.delete(`/glo/boards/${board_id}/columns/${column_id}`)).data;
@@ -66,8 +66,11 @@ function v1(token: string) {
           await axios.get(`/glo/boards/${board_id}/columns/${column_id}/cards?page=${ (options && options.page) || 1}&per_page=${ (options && options.per_page) || 50}&archived=${ (options && options.archived) || false}&sort=${ (options && options.sort) || 'asc'}&fields=${ ((options && options.fields) || ['name', 'board_id', 'column_id']).join('%2C')}`)
         ).data;
       },
-      create: async (board_id: string, column_name: string, position = 0): Promise<Column> => {
-        return (await axios.post(`/glo/boards/${board_id}/columns`, { name: column_name, position })).data;
+      create: async (board_id: string, column: NewColumn): Promise<Column> => {
+        return (await axios.post(`/glo/boards/${board_id}/columns`, column)).data;
+      },
+      batchCreate: async (board_id: string, columns: [NewColumn], send_notifications: boolean = false): Promise<{successful: [Column], errors: [BatchError]}> => {
+        return (await axios.post(`/glo/boards/${board_id}/columns/batch`, {columns: columns, send_notifications: send_notifications})).data;
       }
     },
     cards: {
@@ -99,6 +102,9 @@ function v1(token: string) {
         },
         create: async (board_id: string, card_id: string, comment: Comment): Promise<Comment> => {
           return (await axios.post(`/glo/boards/${board_id}/cards/${card_id}/comments`, comment)).data;
+        },
+        batchCreate: async (board_id: string, card_id: string, comments: [Comment], send_notifications: boolean = false): Promise<{successful: [Comment], errors: [BatchError]}> => {
+          return (await axios.post(`/glo/boards/${board_id}/cards/${card_id}/comments`, {comments: comments, send_notifications: send_notifications})).data;
         }
       },
       getAll: async (board_id: string, options?: GetCardOptions & PageOptions & { archived: boolean, sort: 'asc' | 'desc' }): Promise<[Card]> => {
@@ -109,7 +115,10 @@ function v1(token: string) {
       },
       create: async (board_id: string, card: Card): Promise<Card> => {
         return (await axios.post(`/glo/boards/${board_id}/cards`, card)).data
-      }
+      },
+      batchCreate: async (board_id: string, cards: [Card], send_notifications: boolean = false): Promise<{successful: [Card], errors: [BatchError]}> => {
+        return (await axios.post(`/glo/boards/${board_id}/cards`, {cards: cards, send_notifications: send_notifications})).data
+      },
     }
   };
 
