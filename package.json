@@ -20,12 +20,12 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.1"
   },
   "devDependencies": {
     "@types/jest": "^23.3.2",
     "@types/node": "^11.9.3",
-    "jest": "^23.6.0",
+    "jest": "^25.1.0",
     "ts-jest": "^23.10.1",
     "typescript": "^3.0.3"
   }
